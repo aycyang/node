@@ -1175,6 +1175,9 @@ const customReporter = new Transform({
   writableObjectMode: true,
   transform(event, encoding, callback) {
     switch (event.type) {
+      case 'test:complete':
+        callback(null, `test ${event.data.name} complete`);
+        break;
       case 'test:dequeue':
         callback(null, `test ${event.data.name} dequeued`);
         break;
@@ -1223,6 +1226,9 @@ const customReporter = new Transform({
   writableObjectMode: true,
   transform(event, encoding, callback) {
     switch (event.type) {
+      case 'test:complete':
+        callback(null, `test ${event.data.name} complete`);
+        break;
       case 'test:dequeue':
         callback(null, `test ${event.data.name} dequeued`);
         break;
@@ -1270,6 +1276,9 @@ Example of a custom reporter using a generator function:
 export default async function * customReporter(source) {
   for await (const event of source) {
     switch (event.type) {
+      case 'test:complete':
+        yield `test ${event.data.name} complete\n`;
+        break;
       case 'test:dequeue':
         yield `test ${event.data.name} dequeued\n`;
         break;
@@ -1313,6 +1322,9 @@ export default async function * customReporter(source) {
 module.exports = async function * customReporter(source) {
   for await (const event of source) {
     switch (event.type) {
+      case 'test:complete':
+        yield `test ${event.data.name} complete\n`;
+        break;
       case 'test:dequeue':
         yield `test ${event.data.name} dequeued\n`;
         break;
